@@ -1,0 +1,44 @@
+function copiarPlanilha() {
+
+  SpreadsheetApp.setActiveSpreadsheet(SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1nRFI3n8j2qlU0A_PBaH4JsIxcsXtAq1KtWkC9eiOaNk/edit#gid=1095061170"))
+  var plan_principal = SpreadsheetApp.getActiveSpreadsheet()
+  
+  var nomes = [
+      "Eventos adversos - Vacina COVID 2021 - Alcides Lins",
+      "Eventos adversos - Vacina COVID 2021 - Cachoeirinha",
+      "Eventos adversos - Vacina COVID 2021 - Capitão Eduardo",
+      "Eventos adversos - Vacina COVID 2021 - Cidade Ozanan",
+      "Eventos adversos - Vacina COVID 2021 - Conjunto Paulo VI",
+      "Eventos adversos - Vacina COVID 2021 - Dom Joaquim",
+      "Eventos adversos - Vacina COVID 2021 - Efigênia Murta",
+      "Eventos adversos - Vacina COVID 2021 - Gentil Gomes",
+      "Eventos adversos - Vacina COVID 2021 - Goiânia",
+      "Eventos adversos - Vacina COVID 2021 - Leopoldo Crisóstomo",
+      "Eventos adversos - Vacina COVID 2021 - Marcelo Pontel",
+      "Eventos adversos - Vacina COVID 2021 - Maria Goretti",
+      "Eventos adversos - Vacina COVID 2021 - Marivanda Baleeiro",
+      "Eventos adversos - Vacina COVID 2021 - Nazaré",
+      "Eventos adversos - Vacina COVID 2021 - Olavo Albino",
+      "Eventos adversos - Vacina COVID 2021 - Padre Fernando",
+      "Eventos adversos - Vacina COVID 2021 - Ribeiro de Abreu",
+      "Eventos adversos - Vacina COVID 2021 - São Gabriel",
+      "Eventos adversos - Vacina COVID 2021 - São Marcos",
+      "Eventos adversos - Vacina COVID 2021 - São Paulo",
+      "Eventos adversos - Vacina COVID 2021 - Vila Maria",
+      "Eventos adversos - Vacina COVID 2021 - CERSAM",
+      "Eventos adversos - Vacina COVID 2021 - CERSAM AD",
+      "Eventos adversos - Vacina COVID 2021 - CERSAMI",
+      "Eventos adversos - Vacina COVID 2021 - SUP",
+      "Eventos adversos - Vacina COVID 2021 - SRT Concórdia",
+      "Eventos adversos - Vacina COVID 2021 - SRT Mossoró",
+      "Eventos adversos - Vacina COVID 2021 - SRT José Paulo"
+    ]
+
+  for(var i = 0;i <= 27;i++){
+    plan_principal.copy(nomes[i])
+    var id_plan_copia = DriveApp.getFilesByName(nomes[i]).next().getId()
+    var plan_copia = DriveApp.getFileById(id_plan_copia)
+    DriveApp.getFolderById("1hWa-LWzK8aCJNlJrmsxbtBw3vL5heTjk").addFile(plan_copia)
+  }
+
+}
