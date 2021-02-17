@@ -1,0 +1,59 @@
+function alterarPlanilhasDaPasta(){
+
+  var nomes = [
+      "nome do arquivo 1",
+      "nome do arquivo 2",
+      .
+      .
+      .
+      "nome do arquivo n"
+  ]
+
+  var pasta = DriveApp.getFolderById("id da pasta")
+  
+  for(let i = 0;i <= nomes.length-1;i++){
+
+    var plan_atual_id = pasta.getFilesByName(nomes[i]).next().getId()
+
+    SpreadsheetApp.setActiveSpreadsheet(SpreadsheetApp.openById(plan_atual_id))
+    
+    for(let j = 0; j<=1; j++){
+      var plan_atual = SpreadsheetApp.getActiveSpreadsheet().getSheets()[j]
+
+      formatacaoCondicional(plan_atual)
+      protecaoDeIntervalo(plan_atual)
+      
+    }
+    
+  }
+
+}
+
+function protecaoDeIntervalo(plan_atual){
+  var protecoes_atuais = plan_atual.getProtections(SpreadsheetApp.ProtectionType.RANGE)
+  for(let n = 0 ; n < protecoes_atuais.length ; n++ ){
+    var protecao_atual = protecoes_atuais[n]
+    if(protecao_atual && protecao_atual.canEdit()){
+      protecao_atual.remove()
+    }
+  }
+  var protecao = plan_atual.getRange("1001:1001").protect()
+  protecao.removeEditors(protecao.getEditors())
+  protecao.addEditor("paulo.victor@pbh.gov.br")
+}
+
+function formatacaoCondicional(plan_atual){
+  plan_atual.clearConditionalFormatRules()
+
+      var range_fc = plan_atual.getRange("a2:z1000")
+
+      var regra_fc = SpreadsheetApp.newConditionalFormatRule()
+        .whenFormulaSatisfied("=$x2")
+        .setBackground("#b7e1cd")
+        .setRanges([range_fc])
+        .build();
+
+      var regras = plan_atual.getConditionalFormatRules()
+      regras.push(regra_fc)
+      plan_atual.setConditionalFormatRules(regras)
+}
