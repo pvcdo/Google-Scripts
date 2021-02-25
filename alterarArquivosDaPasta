@@ -1,30 +1,16 @@
 function alterarPlanilhasDaPasta(){
 
   var nomes = [
-    "FELUMA - Espera ou substituição - Alcides Lins",
-    "FELUMA - Espera ou substituição - Cachoeirinha",
-    "FELUMA - Espera ou substituição - Capitão Eduardo",
-    "FELUMA - Espera ou substituição - Cidade Ozanan",
-    "FELUMA - Espera ou substituição - Conjunto Paulo VI",
-    "FELUMA - Espera ou substituição - Dom Joaquim",
-    "FELUMA - Espera ou substituição - Efigênia Murta",
-    "FELUMA - Espera ou substituição - Gentil Gomes",
-    "FELUMA - Espera ou substituição - Goiânia",
-    "FELUMA - Espera ou substituição - Leopoldo Crisóstomo",
-    "FELUMA - Espera ou substituição - Marcelo Pontel",
-    "FELUMA - Espera ou substituição - Maria Goretti",
-    "FELUMA - Espera ou substituição - Marivanda Baleeiro",
-    "FELUMA - Espera ou substituição - Nazaré",
-    "FELUMA - Espera ou substituição - Olavo Albino",
-    "FELUMA - Espera ou substituição - Padre Fernando",
-    "FELUMA - Espera ou substituição - Ribeiro de Abreu",
-    "FELUMA - Espera ou substituição - São Gabriel",
-    "FELUMA - Espera ou substituição - São Marcos",
-    "FELUMA - Espera ou substituição - São Paulo",
-    "FELUMA - Espera ou substituição - Vila Maria"
+    "nome do arquivo 1",
+    "nome do arquivo 2",
+    "nome do arquivo 3",
+    .
+    .
+    .
+    "nome do arquivo n",
   ]
 
-  var pasta = DriveApp.getFolderById("16N0Xv0aDsvcWrS4O7zEUFLsDu39pTSOb") //pasta onde estão as planilhas cujos nomes estão no array
+  var pasta = DriveApp.getFolderById("id da pasta") //pasta onde estão as planilhas cujos nomes estão no array
   
   for(let i = 0;i <= nomes.length-1;i++){
 
@@ -32,6 +18,7 @@ function alterarPlanilhasDaPasta(){
     SpreadsheetApp.setActiveSpreadsheet(SpreadsheetApp.openById(plan_atual_id))
     
     //Navegando por abas
+    
       /*for(let j = 0; j<=1; j++){
         //var plan_atual = SpreadsheetApp.getActiveSpreadsheet().getSheets()[j]
 
@@ -39,32 +26,34 @@ function alterarPlanilhasDaPasta(){
         //protecaoDeIntervalo(plan_atual)
         
       }*/
-
-    var nome_aba = "Espera"
-    //var nome_consolidado = "POSTO DE SAÚDE"
-
-    var plan_espera = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_aba)
-    //var plan_consolidado = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_consolidado)
-
-    //plan_consolidado.setName("CONSOLIDADO")
-
-    //var plan_atual = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_consolidado)
-
-    Logger.log(nomes[i])
-
-    var ultima_linha = plan_espera.getMaxRows()
     
-    //incluirColunas(plan_residencia)
-    //removerValidacaoDeDados(plan_residencia)
-    //alterarTextos(plan_residencia)
-      formatacaoCondicional(plan_espera)
-    //deletarDados(plan_consolidado)
-    //validacaoDeDados(plan_residencia)
-    //deletarLinhasColunas(plan_consolidado)
-      protecaoDeIntervalo(plan_espera, ultima_linha)
-    //ocultarColunas(plan_residencia,2,4) ; ocultarColunas(plan_residencia,19,3)
-    //coresAlternadas(plan_residencia,"#cca677","#f8f2eb")
-    //congelarColunas(plan_residencia,6)
+    //Fazer alterações em uma aba específica
+
+      var nome_aba = "Espera"
+      //var nome_consolidado = "POSTO DE SAÚDE"
+
+      var plan_espera = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_aba)
+      //var plan_consolidado = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_consolidado)
+
+      //plan_consolidado.setName("CONSOLIDADO")
+
+      //var plan_atual = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_consolidado)
+
+      Logger.log(nomes[i])
+
+      var ultima_linha = plan_espera.getMaxRows()
+
+      //incluirColunas(plan_residencia)
+      //removerValidacaoDeDados(plan_residencia)
+      //alterarTextos(plan_residencia)
+        formatacaoCondicional(plan_espera)
+      //deletarDados(plan_consolidado)
+      //validacaoDeDados(plan_residencia)
+      //deletarLinhasColunas(plan_consolidado)
+        protecaoDeIntervalo(plan_espera, ultima_linha)
+      //ocultarColunas(plan_residencia,2,4) ; ocultarColunas(plan_residencia,19,3)
+      //coresAlternadas(plan_residencia,"#cca677","#f8f2eb")
+      //congelarColunas(plan_residencia,6)
   }
 }
 
