@@ -1,35 +1,205 @@
 function alterarPlanilhasDaPasta(){
 
   var nomes = [
-      "nome do arquivo 1",
-      "nome do arquivo 2",
-      .
-      .
-      .
-      "nome do arquivo n"
+    "FELUMA - Espera ou substituição - Alcides Lins",
+    "FELUMA - Espera ou substituição - Cachoeirinha",
+    "FELUMA - Espera ou substituição - Capitão Eduardo",
+    "FELUMA - Espera ou substituição - Cidade Ozanan",
+    "FELUMA - Espera ou substituição - Conjunto Paulo VI",
+    "FELUMA - Espera ou substituição - Dom Joaquim",
+    "FELUMA - Espera ou substituição - Efigênia Murta",
+    "FELUMA - Espera ou substituição - Gentil Gomes",
+    "FELUMA - Espera ou substituição - Goiânia",
+    "FELUMA - Espera ou substituição - Leopoldo Crisóstomo",
+    "FELUMA - Espera ou substituição - Marcelo Pontel",
+    "FELUMA - Espera ou substituição - Maria Goretti",
+    "FELUMA - Espera ou substituição - Marivanda Baleeiro",
+    "FELUMA - Espera ou substituição - Nazaré",
+    "FELUMA - Espera ou substituição - Olavo Albino",
+    "FELUMA - Espera ou substituição - Padre Fernando",
+    "FELUMA - Espera ou substituição - Ribeiro de Abreu",
+    "FELUMA - Espera ou substituição - São Gabriel",
+    "FELUMA - Espera ou substituição - São Marcos",
+    "FELUMA - Espera ou substituição - São Paulo",
+    "FELUMA - Espera ou substituição - Vila Maria"
   ]
 
-  var pasta = DriveApp.getFolderById("id da pasta")
+  var pasta = DriveApp.getFolderById("16N0Xv0aDsvcWrS4O7zEUFLsDu39pTSOb") //pasta onde estão as planilhas cujos nomes estão no array
   
   for(let i = 0;i <= nomes.length-1;i++){
 
     var plan_atual_id = pasta.getFilesByName(nomes[i]).next().getId()
-
     SpreadsheetApp.setActiveSpreadsheet(SpreadsheetApp.openById(plan_atual_id))
     
-    for(let j = 0; j<=1; j++){
-      var plan_atual = SpreadsheetApp.getActiveSpreadsheet().getSheets()[j]
+    //Navegando por abas
+      /*for(let j = 0; j<=1; j++){
+        //var plan_atual = SpreadsheetApp.getActiveSpreadsheet().getSheets()[j]
 
-      formatacaoCondicional(plan_atual)
-      protecaoDeIntervalo(plan_atual)
-      
-    }
+        //formatacaoCondicional(plan_atual)
+        //protecaoDeIntervalo(plan_atual)
+        
+      }*/
+
+    var nome_aba = "Espera"
+    //var nome_consolidado = "POSTO DE SAÚDE"
+
+    var plan_espera = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_aba)
+    //var plan_consolidado = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_consolidado)
+
+    //plan_consolidado.setName("CONSOLIDADO")
+
+    //var plan_atual = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_consolidado)
+
+    Logger.log(nomes[i])
+
+    var ultima_linha = plan_espera.getMaxRows()
     
+    //incluirColunas(plan_residencia)
+    //removerValidacaoDeDados(plan_residencia)
+    //alterarTextos(plan_residencia)
+      formatacaoCondicional(plan_espera)
+    //deletarDados(plan_consolidado)
+    //validacaoDeDados(plan_residencia)
+    //deletarLinhasColunas(plan_consolidado)
+      protecaoDeIntervalo(plan_espera, ultima_linha)
+    //ocultarColunas(plan_residencia,2,4) ; ocultarColunas(plan_residencia,19,3)
+    //coresAlternadas(plan_residencia,"#cca677","#f8f2eb")
+    //congelarColunas(plan_residencia,6)
   }
+}
+
+function congelarColunas(plan_atual,coluna){
+  plan_atual.setFrozenColumns(coluna)
+}
+
+function coresAlternadas(plan_atual,cor_titulo,cor_segunda){
 
 }
 
-function protecaoDeIntervalo(plan_atual){
+function ocultarColunas(plan_atual,col_inicial,num_cols){
+  plan_atual.hideColumns(col_inicial,num_cols)
+}
+
+function deletarLinhasColunas(plan_consolidado){
+
+  var n_colunas = plan_consolidado.getMaxColumns()
+  var n_linhas = plan_consolidado.getMaxRows()
+
+  if(n_colunas > 6){
+    plan_consolidado.deleteColumns(7,n_colunas-6)
+  }
+  if(n_linhas > 2){
+    plan_consolidado.deleteRows(3,n_linhas-2)
+  }
+
+  plan_consolidado.getRange("a2:f2").setNumberFormat("0")
+}
+
+
+function deletarDados(plan_atual){
+  /*plan_atual.getRange("1:1").clearContent()
+  plan_atual.getRange("1001:1001").clearContent()*/
+}
+
+function alterarTextos(plan_atual){
+  /*plan_atual.getRange(1,24).setValue("MARCA DA 1ª DOSE")
+  plan_atual.getRange(1,25).setValue("DATA 1ª DOSE")
+  plan_atual.getRange(1,26).setValue("QUEM ADMINISTROU 1ª DOSE")
+  plan_atual.getRange(1,27).setValue("MARCA DA 2ª DOSE")
+  plan_atual.getRange(1,28).setValue("DATA 2ª DOSE")
+  plan_atual.getRange(1,29).setValue("QUEM ADMINISTROU 2ª DOSE")
+
+  plan_atual.getRange(1,1).setValue("Cadastrados")
+  plan_atual.getRange(1,2).setValue("Agendados")
+  plan_atual.getRange(1,3).setValue("1ª dose - AstraZeneca - Equipe volante")
+  plan_atual.getRange(1,4).setValue("1ª dose - CoronaVac - Equipe volante")
+  plan_atual.getRange(1,5).setValue("2ª dose - AstraZeneca - Equipe volante")
+  plan_atual.getRange(1,6).setValue("2ª dose - CoronaVac - Equipe volante")
+
+  var nome_astrazeneca = '"AstraZeneca"'
+  var nome_coronavac = '"CoronaVac"'
+  var nome_equipevolante = '"Equipe volante"'
+  var maior_0 = '">0"'
+
+  plan_atual.getRange(2,1).setValue("=COUNTA('RESIDÊNCIA'!F2:F)")
+  plan_atual.getRange(2,2).setValue("=COUNTA('RESIDÊNCIA'!W2:W)")
+  plan_atual.getRange(2,3).setValue("=COUNTIFS('RESIDÊNCIA'!$X$2:$X;" + nome_astrazeneca + ";'RESIDÊNCIA'!$Y$2:$Y;" + maior_0 + ";'RESIDÊNCIA'!$Z$2:$Z;" + nome_equipevolante + ")")
+  plan_atual.getRange(2,4).setValue("=COUNTIFS('RESIDÊNCIA'!$X$2:$X;" + nome_coronavac + ";'RESIDÊNCIA'!$Y$2:$Y;" + maior_0 + ";'RESIDÊNCIA'!$Z$2:$Z;" + nome_equipevolante + ")")
+  plan_atual.getRange(2,5).setValue("=COUNTIFS('RESIDÊNCIA'!$AA$2:$AA;" + nome_astrazeneca + ";'RESIDÊNCIA'!$AB$2:$AB;" + maior_0 + ";'RESIDÊNCIA'!$AC$2:$AC;" + nome_equipevolante + ")")
+  plan_atual.getRange(2,6).setValue("=COUNTIFS('RESIDÊNCIA'!$AA$2:$AA;" + nome_coronavac + ";'RESIDÊNCIA'!$AB$2:$AB;" + maior_0 + ";'RESIDÊNCIA'!$AC$2:$AC;" + nome_equipevolante + ")")*/
+
+  /*plan_atual.getRange(1,28).setValue("DATA PROGRAMADA 2º DOSE")
+  plan_atual.getRange(1,29).setValue("DATA REALIZADA 2º DOSE")*/
+
+  plan_atual.getRange("AB2").setValue('=IF(OR(Y2="";X2="");"";IF(X2="CoronaVac";Y2+15;Y2+90))')
+  plan_atual.getRange("AB2").copyTo(plan_atual.getRange("AB3:AB"))
+  
+}
+
+function incluirColunas(plan_atual){
+  /*plan_atual.insertColumnAfter(25)
+  plan_atual.insertColumnsAfter(24,2)
+  plan_atual.insertColumnAfter(23)*/
+
+  plan_atual.insertColumnBefore(29)
+}
+
+function removerValidacaoDeDados(plan_atual){
+  plan_atual.getRange("a2:ae").setDataValidation(null)
+}
+
+
+function validacaoDeDados(plan_atual){
+  //plan_atual.getRange("a2:ae").setDataValidation(null)
+
+  var regraVD_marca = SpreadsheetApp.newDataValidation().requireValueInList(["AstraZeneca","CoronaVac"],true).setAllowInvalid(false).build()
+  var regraVD_data = SpreadsheetApp.newDataValidation().requireDate().setHelpText("Esta coluna só recebe datas! Caso julgue necessário use o campo de observações!").setAllowInvalid(false).build()
+  var regraVD_local = SpreadsheetApp.newDataValidation().requireValueInList(["Equipe volante","Centro de saúde","Outro local (especificado em observações)"],true).setAllowInvalid(false).build()
+
+  plan_atual.getRange("x2:x").setDataValidation(regraVD_marca)
+  plan_atual.getRange("aa2:aa").setDataValidation(regraVD_marca)
+
+  plan_atual.getRange("v2:v").setDataValidation(regraVD_data)
+  plan_atual.getRange("w2:w").setDataValidation(regraVD_data)
+  plan_atual.getRange("y2:y").setDataValidation(regraVD_data)
+  plan_atual.getRange("ab2:ab").setDataValidation(regraVD_data)
+  plan_atual.getRange("ac2:ac").setDataValidation(regraVD_data)
+
+  plan_atual.getRange("z2:z").setDataValidation(regraVD_local)
+  plan_atual.getRange("ad2:ad").setDataValidation(regraVD_local)
+}
+
+function formatacaoCondicional(plan_atual){
+  plan_atual.clearConditionalFormatRules()
+
+  var range = plan_atual.getRange("a2:f")
+
+  var regraFC_solicitado = SpreadsheetApp.newConditionalFormatRule()
+    .whenFormulaSatisfied('=$a2="Solicitado"')
+    .setBackground("#b6d7a8")
+    .setRanges([range])
+  .build();
+
+  var regraFC_cancelado = SpreadsheetApp.newConditionalFormatRule()
+    .whenFormulaSatisfied('=$a2="Cancelado"')
+    .setBackground("#d5a6bd")
+    .setRanges([range])
+  .build();
+
+  var regraFC_novo = SpreadsheetApp.newConditionalFormatRule()
+    .whenFormulaSatisfied('=AND($A2="";$B2<>"")')
+    .setBackground("#ffe599")
+    .setRanges([range])
+  .build();
+
+  var regras = plan_atual.getConditionalFormatRules()
+  regras.push(regraFC_solicitado)
+  regras.push(regraFC_cancelado)
+  regras.push(regraFC_novo)
+  plan_atual.setConditionalFormatRules(regras)
+}
+
+function protecaoDeIntervalo(plan_atual,ul){
   var protecoes_atuais = plan_atual.getProtections(SpreadsheetApp.ProtectionType.RANGE)
   for(let n = 0 ; n < protecoes_atuais.length ; n++ ){
     var protecao_atual = protecoes_atuais[n]
@@ -37,23 +207,8 @@ function protecaoDeIntervalo(plan_atual){
       protecao_atual.remove()
     }
   }
-  var protecao = plan_atual.getRange("1001:1001").protect()
-  protecao.removeEditors(protecao.getEditors())
-  protecao.addEditor("paulo.victor@pbh.gov.br")
-}
 
-function formatacaoCondicional(plan_atual){
-  plan_atual.clearConditionalFormatRules()
-
-      var range_fc = plan_atual.getRange("a2:z1000")
-
-      var regra_fc = SpreadsheetApp.newConditionalFormatRule()
-        .whenFormulaSatisfied("=$x2")
-        .setBackground("#b7e1cd")
-        .setRanges([range_fc])
-        .build();
-
-      var regras = plan_atual.getConditionalFormatRules()
-      regras.push(regra_fc)
-      plan_atual.setConditionalFormatRules(regras)
+  var protecaoA = plan_atual.getRange("A2:A").protect()
+  protecaoA.removeEditors(protecaoA.getEditors())
+  protecaoA.addEditor("paulo.victor@pbh.gov.br")
 }
