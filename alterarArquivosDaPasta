@@ -201,3 +201,25 @@ function protecaoDeIntervalo(plan_atual,ul){
   protecaoA.removeEditors(protecaoA.getEditors())
   protecaoA.addEditor("paulo.victor@pbh.gov.br")
 }
+
+function procurarTexto(plan_atual, texto, tipo = 0){
+  var n_abas = plan_atual.getSheets().length
+
+  for(var i = 0;i < n_abas;i++){
+
+    var plan_atual_aba = plan_atual.getSheets()[i]
+    var n_cols = plan_atual_aba.getMaxColumns()
+
+    for(var col = 1;col <= n_cols;col++){
+
+      var escrito = plan_atual_aba.getRange(3,col).getValue()
+      if(escrito == texto){
+        //executar este código
+        if(tipo == 0){
+          col = n_cols //caso a procura seja por um registro único
+        }
+      }
+
+    }
+  }
+}
