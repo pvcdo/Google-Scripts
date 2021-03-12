@@ -1,30 +1,16 @@
 function alterarPlanilhasDaPasta(){
 
   var nomes = [
-    "Idosos Cadastrados - Alcides Lins",
-    "Idosos Cadastrados - Cachoeirinha",
-    "Idosos Cadastrados - Capitão Eduardo",
-    "Idosos Cadastrados - Cidade Ozanan",
-    "Idosos Cadastrados - Conjunto Paulo VI",
-    "Idosos Cadastrados - Dom Joaquim",
-    "Idosos Cadastrados - Efigênia Murta",
-    "Idosos Cadastrados - Gentil Gomes",
-    "Idosos Cadastrados - Goiânia",
-    "Idosos Cadastrados - Leopoldo Crisóstomo",
-    "Idosos Cadastrados - Marcelo Pontel",
-    "Idosos Cadastrados / Acamados COVID-19 - Maria Goretti",
-    "Idosos Cadastrados - Marivanda Baleeiro",
-    "Idosos Cadastrados - Nazaré",
-    "Idosos Cadastrados - Olavo Albino",
-    "Idosos Cadastrados - Padre Fernando",
-    "Idosos Cadastrados - Ribeiro de Abreu",
-    "Idosos Cadastrados - São Gabriel",
-    "Idosos Cadastrados - São Marcos",
-    "Idosos Cadastrados - São Paulo",
-    "Idosos Cadastrados - Vila Maria"
+    "nome da planilha 1"
+    "nome da planilha 2"
+    "nome da planilha 3"
+    .
+    .
+    .
+    "nome da planilha n"
   ]
 
-  var pasta = DriveApp.getFolderById("1omb-4VAQyds-YjMMEfhJU--0KS_D_A71") //pasta onde estão as planilhas cujos nomes estão no array
+  var pasta = DriveApp.getFolderById("id da pasta onde estão as planilhas cujos nomes estão no array") 
   
   for(let i = 0;i <= nomes.length-1;i++){
 
@@ -194,19 +180,19 @@ function ordenarFormatacaoCondicional(plan_atual){
     if(range.substr(0,5)=="A3:AG"){
       switch(cor_fundo){
         case "#FF0000":
-          var primeira_FC = plan_atual.getConditionalFormatRules()[j]
+          var fc1 = plan_atual.getConditionalFormatRules()[j]
           break;
         case "#FF00FF":
-          var segunda_FC = plan_atual.getConditionalFormatRules()[j]
+          var fc2 = plan_atual.getConditionalFormatRules()[j]
           break;
         case "#D5A6BD":
-          var terceira_FC = plan_atual.getConditionalFormatRules()[j]
+          var fc3 = plan_atual.getConditionalFormatRules()[j]
           break;
         case "#FFE599":
-          var quarta_FC = plan_atual.getConditionalFormatRules()[j]
+          var fc4 = plan_atual.getConditionalFormatRules()[j]
           break;
         case "#B7E1CD":
-          var quinta_FC = plan_atual.getConditionalFormatRules()[j]
+          var fc5 = plan_atual.getConditionalFormatRules()[j]
           break;
       }
     }
@@ -216,11 +202,11 @@ function ordenarFormatacaoCondicional(plan_atual){
 
   var regras = plan_atual.getConditionalFormatRules()
 
-  regras.push(primeira_FC)
-  regras.push(segunda_FC)
-  regras.push(terceira_FC)
-  regras.push(quarta_FC)
-  regras.push(quinta_FC)
+  regras.push(fc1)
+  regras.push(fc2)
+  regras.push(fc3)
+  regras.push(fc4)
+  regras.push(fc5)
   plan_atual.setConditionalFormatRules(regras)
 
 }
@@ -338,13 +324,13 @@ function protecaoDeIntervalo(plan_atual, ul){
   }
   var protecao1001 = plan_atual.getRange(ul + ":" + ul).protect()
   protecao1001.removeEditors(protecao1001.getEditors())
-  protecao1001.addEditor("paulo.victor@pbh.gov.br")
-  protecao1001.addEditor("jesilainebarbosa@pbh.gov.br")
+  protecao1001.addEditor("e-mail do editor 1")
+  protecao1001.addEditor("e-mail do editor 2")
 
   var protecaoAB = plan_atual.getRange("AB2:AB").protect()
   protecaoAB.removeEditors(protecaoAB.getEditors())
-  protecaoAB.addEditor("paulo.victor@pbh.gov.br")
-  protecaoAB.addEditor("jesilainebarbosa@pbh.gov.br")
+  protecaoAB.addEditor("e-mail do editor 1")
+  protecaoAB.addEditor("e-mail do editor 2")
 }
 
 /*6*****************************************/
