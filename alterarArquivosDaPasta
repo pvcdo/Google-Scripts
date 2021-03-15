@@ -23,36 +23,36 @@ function alterarPlanilhasDaPasta(){
       //for(let j = 0; j<=1; j++){
         //var plan_atual = SpreadsheetApp.getActiveSpreadsheet().getSheets()[j]
 
-        /*1*****************************************/
+      /*1****************************************formatação condicional*/
 
-        //formatacaoCondicional(plan_atual)
-        //ordenarFormatacaoCondicional(plan_atual)
-        //limparFormatacaoCondicional(plan_atual)
-        
-        /*2*****************************************/
+      //formatacaoCondicional(plan_residencia)
+      //ordenarFormatacaoCondicional(plan_residencia)
+      //limparFormatacaoCondicional(plan_residencia)
+      
+      /*2****************************************validação de dados*/
 
-        //removerValidacaoDeDados(plan_atual)
-        //validacaoDeDados(plan_atual)
+      //removerValidacaoDeDados(plan_residencia)
+      //validacaoDeDados(plan_residencia)
 
-        /*3*****************************************/
+      /*3****************************************alterar dados*/
 
-        //alterarTextos(plan_atual)
-        //deletarDados(plan_atual)
+      //alterarTextos(plan_residencia)
+      //deletarDados(plan_consolidado)
 
-        /*4*****************************************/
+      /*4****************************************colunas*/
 
-        //incluirColunas(plan_atual)
-        //ocultarColunas(plan_atual,2,4) ; ocultarColunas(plan_atual,19,3)
-        //deletarLinhasColunas(plan_atual)        
-        
-        /*5*****************************************/
+      //incluirColunas(plan_residencia)
+      //ocultarColunas(plan_residencia,2,4) ; ocultarColunas(plan_residencia,19,3)
+      //deletarLinhasColunas(plan_consolidado)  
+      //congelarColunas(plan_residencia,6)
+      
+      /*5****************************************proteção de páginas e intervalos*/
 
-        //protecaoDeIntervalo(plan_atual, ultima_linha)
+      //protecaoDeIntervalo(plan_residencia, ultima_linha)
 
-        /*6*****************************************/
-
-        //congelarColunas(plan_atual,6)
-        //alterarNomeAba(plan_atual, "RESIDÊNCIA")        
+      /*6****************************************abas*/
+      
+      //alterarNomeAba(plan_residencia, "RESIDÊNCIA")        
         
       //}
 
@@ -64,35 +64,35 @@ function alterarPlanilhasDaPasta(){
       var plan_residencia = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_residencia)
       var plan_consolidado = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_consolidado)    
 
-      /*1*****************************************/
+      /*1****************************************formatação condicional*/
 
       //formatacaoCondicional(plan_residencia)
       //ordenarFormatacaoCondicional(plan_residencia)
       //limparFormatacaoCondicional(plan_residencia)
       
-      /*2*****************************************/
+      /*2****************************************validação de dados*/
 
       //removerValidacaoDeDados(plan_residencia)
       //validacaoDeDados(plan_residencia)
 
-      /*3*****************************************/
+      /*3****************************************alterar dados*/
 
       //alterarTextos(plan_residencia)
       //deletarDados(plan_consolidado)
 
-      /*4*****************************************/
+      /*4****************************************colunas*/
 
       //incluirColunas(plan_residencia)
       //ocultarColunas(plan_residencia,2,4) ; ocultarColunas(plan_residencia,19,3)
-      //deletarLinhasColunas(plan_consolidado)        
+      //deletarLinhasColunas(plan_consolidado)  
+      //congelarColunas(plan_residencia,6)
       
-      /*5*****************************************/
+      /*5****************************************proteção de páginas e intervalos*/
 
       //protecaoDeIntervalo(plan_residencia, ultima_linha)
 
-      /*6*****************************************/
-
-      //congelarColunas(plan_residencia,6)
+      /*6****************************************abas*/
+      
       //alterarNomeAba(plan_residencia, "RESIDÊNCIA")
       
     //
