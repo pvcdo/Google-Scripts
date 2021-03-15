@@ -52,7 +52,8 @@ function alterarPlanilhasDaPasta(){
 
       /*6****************************************abas*/
       
-      //alterarNomeAba(plan_residencia, "RESIDÊNCIA")        
+      //alterarNomeAba(plan_residencia, "RESIDÊNCIA")
+      //ocultarAbas(aba_atual)
         
       //}
 
@@ -94,6 +95,7 @@ function alterarPlanilhasDaPasta(){
       /*6****************************************abas*/
       
       //alterarNomeAba(plan_residencia, "RESIDÊNCIA")
+      //ocultarAbas(aba_atual)
       
     //
   }
@@ -311,6 +313,9 @@ function deletarLinhasColunas(plan_consolidado){
 
   plan_consolidado.getRange("a2:f2").setNumberFormat("0")
 }
+function congelarColunas(plan_atual,coluna){
+  plan_atual.setFrozenColumns(coluna)
+}
 
 /*5*****************************************/
 
@@ -335,9 +340,24 @@ function protecaoDeIntervalo(plan_atual, ul){
 
 /*6*****************************************/
 
-function congelarColunas(plan_atual,coluna){
-  plan_atual.setFrozenColumns(coluna)
-}
 function alterarNomeAba(plan_atual,novo_nome){
   plan_atual.setName(novo_nome)
+}
+function ocultarAbas(aba_atual){
+  var nome_aba = aba_atual.getSheetName()
+
+  Logger.log(nome_aba)
+          
+  if(nome_aba != "INFLUENZA 2020" ||
+  nome_aba != "ÓBITOS/MUDOU"){
+    if(nome_aba.substr(0,2) != "EQ"){
+      if(nome_aba.substr(0,4) != "ILPI"){
+        if(nome_aba != "CÁLCULOS"){
+          aba_atual.hideSheet()
+        }
+      }else if(nome_aba.substr(5,6) == "FUNCIO"){
+          aba_atual.hideSheet()
+      }
+    }
+  }
 }
