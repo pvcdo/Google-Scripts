@@ -49,6 +49,7 @@ function alterarPlanilhasDaPasta(){
       /*5****************************************proteção de páginas e intervalos*/
 
       //protecaoDeIntervalo(plan_residencia, ultima_linha)
+      //removerProtecao(aba_atual, nome_planilha)
 
       /*6****************************************abas*/
       
@@ -91,6 +92,7 @@ function alterarPlanilhasDaPasta(){
       /*5****************************************proteção de páginas e intervalos*/
 
       //protecaoDeIntervalo(plan_residencia, ultima_linha)
+      //removerProtecao(aba_atual, nome_planilha)
 
       /*6****************************************abas*/
       
@@ -363,8 +365,48 @@ function protecaoDeIntervalo(plan_atual, nome_planilha=""){
         Logger.log("A aba " + nome_aba + " da planilha " + nome_planilha + " está desconfigurada")
       }
     }
-
   }
+  
+  function removerProtecao(plan_atual, nome_planilha=""){
+
+    var nome_aba = plan_atual.getSheetName()
+    var b3 = plan_atual.getRange("b3").getValue()
+    
+    Logger.log(nome_aba)
+
+    if(nome_aba.substr(0,2) == "bla"){
+      if(nome_aba.slice(-8)=="bla bla"){
+        if(b3=="NOME"){
+          var protecoes = plan_atual.getProtections(SpreadsheetApp.ProtectionType.RANGE)
+          var n_protecoes = protecoes.length
+
+          for(var p = 0 ; p < n_protecoes ; p++){
+            var protecao = protecoes[p]
+            var protecao_range = protecao.getRange().getA1Notation()
+            Logger.log(protecao_range)
+            if (protecao_range == "1:3"){
+              protecao.remove()
+            }
+          }
+        }
+      }
+    }else if(nome_aba.substr(0,4) == "bla"){
+      if(b3=="NOME"){
+        var protecoes = plan_atual.getProtections(SpreadsheetApp.ProtectionType.RANGE)
+        var n_protecoes = protecoes.length
+
+        for(var p = 0 ; p < n_protecoes ; p++){
+          var protecao = protecoes[p]
+          var protecao_range = protecao.getRange().getA1Notation()
+          Logger.log(protecao_range)
+          if (protecao_range == "1:3"){
+            protecao.remove()
+          }
+        }
+      }
+    }
+    
+  }  
 
 /*6*****************************************/
 
