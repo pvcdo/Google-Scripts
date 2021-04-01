@@ -319,24 +319,52 @@ function congelarColunas(plan_atual,coluna){
 
 /*5*****************************************/
 
-function protecaoDeIntervalo(plan_atual, ul){
-  var protecoes_atuais = plan_atual.getProtections(SpreadsheetApp.ProtectionType.RANGE)
-  for(let n = 0 ; n < protecoes_atuais.length ; n++ ){
-    var protecao_atual = protecoes_atuais[n]
-    if(protecao_atual && protecao_atual.canEdit()){
-      protecao_atual.remove()
+function protecaoDeIntervalo(plan_atual, nome_planilha=""){
+    var protecoes_atuais = plan_atual.getProtections(SpreadsheetApp.ProtectionType.RANGE)
+    for(let n = 0 ; n < protecoes_atuais.length ; n++ ){
+      var protecao_atual = protecoes_atuais[n]
+      if(protecao_atual && protecao_atual.canEdit()){
+        protecao_atual.remove()
+      }
     }
-  }
-  var protecao1001 = plan_atual.getRange(ul + ":" + ul).protect()
-  protecao1001.removeEditors(protecao1001.getEditors())
-  protecao1001.addEditor("e-mail do editor 1")
-  protecao1001.addEditor("e-mail do editor 2")
+    var protecao1001 = plan_atual.getRange(ul + ":" + ul).protect()
+    protecao1001.removeEditors(protecao1001.getEditors())
+    protecao1001.addEditor("e-mail do editor 1")
+    protecao1001.addEditor("e-mail do editor 2")
 
-  var protecaoAB = plan_atual.getRange("AB2:AB").protect()
-  protecaoAB.removeEditors(protecaoAB.getEditors())
-  protecaoAB.addEditor("e-mail do editor 1")
-  protecaoAB.addEditor("e-mail do editor 2")
-}
+    var protecaoAB = plan_atual.getRange("AB2:AB").protect()
+    protecaoAB.removeEditors(protecaoAB.getEditors())
+    protecaoAB.addEditor("e-mail do editor 1")
+    protecaoAB.addEditor("e-mail do editor 2")
+
+    var nome_aba = plan_atual.getSheetName()
+    var b3 = plan_atual.getRange("b3").getValue()
+    
+    Logger.log(nome_aba)
+    
+    if(nome_aba.substr(0,2) == "bla"){
+      if(nome_aba.slice(-8)=="bla bla"){
+        if(b3=="NOME"){
+          var protecaoLinhas = plan_atual.getRange("1:3").protect()
+          protecaoLinhas.removeEditors(protecaoLinhas.getEditors())
+          protecaoLinhas.addEditor("e-mail do editor 1")
+          protecaoLinhas.addEditor("e-mail do editor 2")
+        }else{
+          Logger.log("A aba " + nome_aba + " da planilha " + nome_planilha + " está desconfigurada")
+        }
+      }
+    }else if(nome_aba.substr(0,4) == "bla bla"){
+      if(b3=="bla"){
+        var protecaoLinhas = plan_atual.getRange("1:3").protect()
+        protecaoLinhas.removeEditors(protecaoLinhas.getEditors())
+        protecaoLinhas.addEditor("e-mail do editor 1")
+        protecaoLinhas.addEditor("e-mail do editor 2")
+      }else{
+        Logger.log("A aba " + nome_aba + " da planilha " + nome_planilha + " está desconfigurada")
+      }
+    }
+
+  }
 
 /*6*****************************************/
 
