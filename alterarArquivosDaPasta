@@ -9,19 +9,27 @@ function alterarPlanilhasDaPasta(){
     .
     "nome da planilha n"
   ]
-
-  var pasta = DriveApp.getFolderById("id da pasta onde estão as planilhas cujos nomes estão no array") 
+  //Definição da pasta de trabalho
+    var pasta = DriveApp.getFolderById("id da pasta onde estão as planilhas cujos nomes estão no array") 
+  //
   
   for(let i = 0;i <= nomes.length-1;i++){
+  
+    //Seleção da planilha
+    
+      //Selecionando a planilha por ID
+        var plan_atual_id = pasta.getFilesByName(nomes[i]).next().getId()
+        SpreadsheetApp.setActiveSpreadsheet(SpreadsheetApp.openById(plan_atual_id))
+      
+      //Selecionando a planilha por URL
+        //var plan_atual_url = pasta.getFilesByName(nomes[i]).next().getUrl()
+        //SpreadsheetApp.setActiveSpreadsheet(SpreadsheetApp.openByUrl(plan_atual_url))
 
-    var plan_atual_id = pasta.getFilesByName(nomes[i]).next().getId()
-    SpreadsheetApp.setActiveSpreadsheet(SpreadsheetApp.openById(plan_atual_id))
-
-    Logger.log(nomes[i])
+      Logger.log(nomes[i])
     
     //Navegando por abas
-      //for(let j = 0; j<=1; j++){
-        //var plan_atual = SpreadsheetApp.getActiveSpreadsheet().getSheets()[j]
+      /*habilitação obrigatória*/ //for(let j = 0; j<=1; j++){  //habilitação obrigatória
+        /*habilitação obrigatória*/ //var plan_atual = SpreadsheetApp.getActiveSpreadsheet().getSheets()[j] //habilitação obrigatória
 
       /*1****************************************formatação condicional*/
 
@@ -61,11 +69,8 @@ function alterarPlanilhasDaPasta(){
 
     //Navegando em aba específica em cada planilha
 
-      var nome_residencia = "RESIDÊNCIA"
-      var nome_consolidado = "POSTO DE SAÚDE"
-
-      var plan_residencia = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_residencia)
-      var plan_consolidado = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(nome_consolidado)    
+      var plan_residencia = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("RESIDÊNCIA")
+      var plan_consolidado = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("POSTO DE SAÚDE")    
 
       /*1****************************************formatação condicional*/
 
