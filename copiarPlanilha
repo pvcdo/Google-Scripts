@@ -1,0 +1,18 @@
+function copiarPlanilha() {
+
+  SpreadsheetApp.setActiveSpreadsheet(SpreadsheetApp.openByUrl("url completa da planilha"))
+  var plan_principal = SpreadsheetApp.getActiveSpreadsheet()
+
+  var nomes = [
+      "nome da 1ª cópia",
+      "nome da 2ª cópia"
+    ]
+
+  for(var i = 0;i <= nomes.length-1;i++){
+    plan_principal.copy(nomes[i])
+    var id_plan_copia = DriveApp.getFilesByName(nomes[i]).next().getId()
+    var plan_copia = DriveApp.getFileById(id_plan_copia)
+    DriveApp.getFolderById("id da planilha (aquilo que vem depois da última barra na url)").addFile(plan_copia)
+  }
+
+}
