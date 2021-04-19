@@ -74,37 +74,44 @@ function alterarPlanilhasDaPasta(){
 
       /*1****************************************formatação condicional*/
 
-      //formatacaoCondicional(plan_residencia)
-      //ordenarFormatacaoCondicional(plan_residencia)
-      //limparFormatacaoCondicional(plan_residencia)
+        //formatacaoCondicional(plan_residencia)
+        //ordenarFormatacaoCondicional(plan_residencia)
+        //limparFormatacaoCondicional(plan_residencia)
       
       /*2****************************************validação de dados*/
 
-      //removerValidacaoDeDados(plan_residencia)
-      //validacaoDeDados(plan_residencia)
+        //removerValidacaoDeDados(plan_residencia)
+        //validacaoDeDados(plan_residencia)
 
       /*3****************************************alterar dados*/
 
-      //alterarTextos(plan_residencia)
-      //deletarDados(plan_consolidado)
+        //alterarTextos(plan_residencia)
+        //deletarDados(plan_consolidado)
 
       /*4****************************************colunas*/
 
-      //incluirColunas(plan_residencia)
-      //ocultarColunas(plan_residencia,2,4) ; ocultarColunas(plan_residencia,19,3)
-      //deletarLinhasColunas(plan_consolidado)  
-      //congelarColunas(plan_residencia,6)
+        //incluirColunas(plan_residencia)
+        //ocultarColunas(plan_residencia,2,4) ; ocultarColunas(plan_residencia,19,3)
+        //deletarLinhasColunas(plan_consolidado)  
+        //congelarColunas(plan_residencia,6)
       
       /*5****************************************proteção de páginas e intervalos*/
 
-      //protecaoDeIntervalo(plan_residencia, ultima_linha)
-      //removerProtecao(aba_atual, nome_planilha)
+        //protecaoDeIntervalo(plan_residencia, ultima_linha)
+        //removerProtecao(aba_atual, nome_planilha)
 
       /*6****************************************abas*/
       
-      //alterarPosicao(plan_consolidado, 1)
-      //alterarNomeAba(plan_residencia, "RESIDÊNCIA")
-      //ocultarAbas(aba_atual)
+        //alterarPosicao(plan_consolidado, 1)
+        //alterarNomeAba(plan_residencia, "RESIDÊNCIA")
+        //ocultarAbas(aba_atual)
+      
+      /*7****************************************formatacao geral*/
+
+        //colorirCelulas(plan_prioritarios,"Indigenas","#ff9900")
+        //colorirCelulas(plan_prioritarios,"Criancas2a4a","#ff9900")
+
+      //
       
     //
   }
@@ -456,6 +463,27 @@ function protecaoDeIntervalo(plan_atual, nome_planilha=""){
         }else if(nome_aba.substr(5,6) == "FUNCIO"){
             aba_atual.hideSheet()
         }
+      }
+    }
+  }
+  
+/*7****************************************formatação geral*/
+
+  function colorirCelulas(plan_atual,range_colunas_colorir,cor){
+    //intervalo para teste
+      /*Alterar nome do parâmetro da função para plan_atual1*/
+      //var plan_atual = SpreadsheetApp.getActiveSheet()
+    //
+    var ranges_nomeados = plan_atual.getNamedRanges()
+    var n_nomeados = ranges_nomeados.length
+    for(var j = 0; j<n_nomeados; j++){
+      var range_nomeado = ranges_nomeados[j]
+      var nome_range_nomeado = range_nomeado.getName()
+      if(nome_range_nomeado == range_colunas_colorir){
+        var intervalo = range_nomeado.getRange()
+        var intervalo_col_ini = intervalo.getColumn()
+        var intervalo_n_cols = intervalo.getNumColumns()
+        plan_atual.getRange(4,intervalo_col_ini,26,intervalo_n_cols).setBackground(cor)
       }
     }
   }
