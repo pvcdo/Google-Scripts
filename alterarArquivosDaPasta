@@ -298,33 +298,44 @@ function deletarDados(plan_atual){
 
 /*4*****************************************/
 
-function incluirColunas(plan_atual){
-  /*plan_atual.insertColumnAfter(25)
-  plan_atual.insertColumnsAfter(24,2)
-  plan_atual.insertColumnAfter(23)*/
+  function incluirColunas(plan_atual){
+    /*plan_atual.insertColumnAfter(25)
+    plan_atual.insertColumnsAfter(24,2)
+    plan_atual.insertColumnAfter(23)*/
 
-  plan_atual.insertColumnBefore(1)
-}
-function ocultarColunas(plan_atual,col_inicial,num_cols){
-  plan_atual.hideColumns(col_inicial,num_cols)
-}
-function deletarLinhasColunas(plan_consolidado){
-
-  var n_colunas = plan_consolidado.getMaxColumns()
-  var n_linhas = plan_consolidado.getMaxRows()
-
-  if(n_colunas > 6){
-    plan_consolidado.deleteColumns(7,n_colunas-6)
+    plan_atual.insertColumnBefore(1)
   }
-  if(n_linhas > 2){
-    plan_consolidado.deleteRows(3,n_linhas-2)
+  function ocultarColunas(plan_atual,col_inicial,num_cols){
+    plan_atual.hideColumns(col_inicial,num_cols)
   }
+  function reexibirColunas(plan_atual,range_colunas_exibir){
+    var ranges_nomeados = plan_atual.getNamedRanges()
+    var n_nomeados = ranges_nomeados.length
+    for(var j = 0; j<n_nomeados; j++){
+      var range_nomeado = ranges_nomeados[j]
+      var nome_range_nomeado = range_nomeado.getName()
+      if(nome_range_nomeado == range_colunas_exibir){
+        plan_atual.showColumns(range_nomeado)
+      }
+    }
+  }
+   function deletarLinhasColunas(plan_consolidado){
 
-  plan_consolidado.getRange("a2:f2").setNumberFormat("0")
-}
-function congelarColunas(plan_atual,coluna){
-  plan_atual.setFrozenColumns(coluna)
-}
+    var n_colunas = plan_consolidado.getMaxColumns()
+    var n_linhas = plan_consolidado.getMaxRows()
+
+    if(n_colunas > 6){
+      plan_consolidado.deleteColumns(7,n_colunas-6)
+    }
+    if(n_linhas > 2){
+      plan_consolidado.deleteRows(3,n_linhas-2)
+    }
+
+    plan_consolidado.getRange("a2:f2").setNumberFormat("0")
+  }
+  function congelarColunas(plan_atual,coluna){
+    plan_atual.setFrozenColumns(coluna)
+  }
 
 /*5*****************************************/
 
