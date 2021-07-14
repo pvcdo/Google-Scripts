@@ -1,0 +1,4 @@
+for(var i = 0; i < nomesUBS.length; i++){
+    var plan_atual = navegar(pasta,nomesUBS[i])
+    
+  }
