@@ -1,0 +1,14 @@
+function navegar(pasta, nomeUBS){
+
+  var nome_plan = "FELUMA - Espera ou substituição - " + nomeUBS
+
+  Logger.log(nome_plan)
+  //Logger.log("navegar")
+
+  var plan_atual_id = pasta.getFilesByName(nome_plan).next().getId()
+  SpreadsheetApp.setActiveSpreadsheet(SpreadsheetApp.openById(plan_atual_id))
+  var plan_atual = SpreadsheetApp.getActiveSpreadsheet()
+
+  return plan_atual
+    
+}
